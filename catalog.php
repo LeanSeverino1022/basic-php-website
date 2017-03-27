@@ -36,7 +36,10 @@ include "inc/header.php";
 
         <ul class="items">
             <?php
+            //  $categories returns the array_keys of all data in the array with category value of $section
             $categories = array_category($catalog, $section);
+
+            // list all elements of $categories array
             foreach($categories as $id) 
             {
                 echo get_item_html($id, $catalog[$id] );

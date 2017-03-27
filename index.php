@@ -5,6 +5,7 @@
 	$pageTitle = "Personal Media Library";
 	$section = null;
 	
+	// include the header
 	include('inc/header.php'); ?>
 
 	<div class="section catalog random">
@@ -21,6 +22,7 @@
 	            {
 		            echo get_item_html($id, $catalog[$id]);
 	            }
+				
 				?>				
 			</ul>
 
@@ -28,6 +30,7 @@
 
 	</div>
 	
+	<!--include the footer-->
 	<?php include('inc/footer.php'); ?>
 
 	
