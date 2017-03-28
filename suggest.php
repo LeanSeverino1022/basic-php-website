@@ -1,12 +1,23 @@
 <?php
 
 if($_SERVER['REQUEST_METHOD'] == "POST") {
-    var_dump($_POST);
-    var_dump($_GET);
+    // var_dump($_POST);
+    // var_dump($_GET);
 
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $details = $_POST['details'];
+    $name = trim(filter_input(INPUT_POST,"name", FILTER_SANITIZE_EMAIL));
+    $email = trim(filter_input(INPUT_POST,"email", FILTER_SANITIZE_EMAIL));
+    $details = trim(filter_input(INPUT_POST,"details", FILTER_SANITIZE_SPECIAL_CHARS));
+
+    if($name == "" || $email ="" || $details ="") {
+        echo "<p> Please fill in the required fields: Name, Email and Details</p>";   
+        exit;     
+    }
+
+    // if this hidden input has a value, something is not right
+    if($_POST["address"] != "" ) {
+        echo "NOT GOOD. BAd form input";
+        exit;
+    }
 
     echo "<pre>";
     $html_body = "";
@@ -47,6 +58,11 @@ include('inc/header.php'); ?>
             <tr>
                 <th><label for="name">Suggest Item details:</label></th>
                 <td><textarea id="details" name="details">default</textarea></td>
+            </tr>
+            <tr style="display: none;">
+            <!--for robots filling up every input text -->
+                <th><label for="address">Address:</label></th>
+                <td><input type="address" id="address" name="address"></td>
             </tr>
         </table>
         <input type="submit" value="send"/>        
