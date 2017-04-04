@@ -1,6 +1,12 @@
 	<?php 
+
+
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 	include "inc/data.php";
 	include "inc/functions.php";
+
+
 
 	$pageTitle = "Personal Media Library";
 	$section = null;
@@ -12,7 +18,7 @@
 
 		<div class="wrapper">
 
-			<h2>May we suggest something?</h2>
+			<h2>May we suggest somethidng?</h2>
 
 			<ul class="items">
 				<?php
