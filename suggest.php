@@ -2,9 +2,10 @@
 
 $error_message = null;
 
+// if user has submitted form date using the post method
 if($_SERVER['REQUEST_METHOD'] == "POST") {
-    var_dump($_POST['details']);
-    var_dump($_GET);
+    // var_dump($_POST['details']);
+    // var_dump($_GET);
 
     // make sure INCOMING form data is safe to use
     $name = trim(filter_input(INPUT_POST,"name", FILTER_SANITIZE_EMAIL));
@@ -14,7 +15,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     $format = trim(filter_input(INPUT_POST,"format", FILTER_SANITIZE_EMAIL));
     $genre = trim(filter_input(INPUT_POST,"genre", FILTER_SANITIZE_EMAIL));
     $year = trim(filter_input(INPUT_POST,"year", FILTER_SANITIZE_EMAIL));
-    $details = trim(filter_input(INPUT_POST,"details", FILTER_SANITIZE_SPECIAL_CHARS));
+    // $details = trim(filter_input(INPUT_POST,"details", FILTER_SANITIZE_SPECIAL_CHARS));
+     $details = $_POST['details'];
 
   
     // check if $name, $email, or $details has no value
@@ -22,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         $error_message = "Please fill in the required fields: Name, Email, Category, and Title";   
     }
 
-    // if this hidden input has a value, something is not right
+    //avoid spammer bots if this hidden input has a value, something is not right
     // priority stuff: if $error_message is still null AND this input is not empty, set error_msg
     if( !isset($error_message) && $_POST["address"] != "" ) {
         $error_message = "NOT GOOD. BAd form input";
@@ -37,6 +39,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         $error_message =  "Invalid Email Address!";       
     }
 
+    // up to this point, if erro_msg is still null then that means everything's good...so continue'
     if(!isset($error_message)) {
         $html_body = "";
         $html_body .= "NAME: " .  $name . "\n";
@@ -387,7 +390,8 @@ include('inc/header.php');
             </tr> 
             <tr>
                 <th><label for="details">Suggest Item details:</label></th>
-                <td><textarea id="details" name="details"> <?php if(isset($details)) echo $details;  ?></textarea></td>
+                <td><textarea id="details" name="details"><?php if(isset($details)) { echo htmlspecialchars($details); } ?></textarea> </td>
+               
             </tr>
 
             <tr style="display: none;">
