@@ -1,6 +1,5 @@
 <?php
 
-<div id="twinkle"></div>
 $error_message = null;
 
 if($_SERVER['REQUEST_METHOD'] == "POST") {
