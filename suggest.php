@@ -1,5 +1,6 @@
 <?php
 
+<div id="twinkle"></div>
 $error_message = null;
 
 // if user has submitted form date using the post method
